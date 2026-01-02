@@ -3,6 +3,7 @@ package com.natalija.hotelapp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,13 +37,13 @@ public class Room {
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "room_amenity",
             joinColumns = @JoinColumn(name = "room_id"),
             inverseJoinColumns = @JoinColumn(name = "amenity_id")
     )
-    private Set<Amenity> amenities;
+    private Set<Amenity> amenities = new HashSet<>();;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reservation> reservations;

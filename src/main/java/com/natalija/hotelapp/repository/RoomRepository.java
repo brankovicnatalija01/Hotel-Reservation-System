@@ -2,8 +2,31 @@ package com.natalija.hotelapp.repository;
 
 import com.natalija.hotelapp.entity.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
+public interface RoomRepository extends JpaRepository<Room, Long>, JpaSpecificationExecutor<Room> {
+
+    List<Room> findByRoomType_NameIgnoreCase(String name);
+
+    @Query("""
+        SELECT r
+        FROM Room r
+        JOIN r.amenities a
+        WHERE LOWER(a.name) IN :amenities
+        GROUP BY r.id
+        HAVING COUNT(DISTINCT a.id) = :amenityCount
+    """)
+    List<Room> findRoomsWithAllAmenitiesIgnoreCase(
+            @Param("amenities") List<String> amenities,
+            @Param("amenityCount") long amenityCount
+    );
+
 }
