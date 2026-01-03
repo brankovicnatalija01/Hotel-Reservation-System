@@ -15,6 +15,7 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long>, JpaSpecificationExecutor<Room> {
 
     List<Room> findByRoomType_NameIgnoreCase(String name);
+    boolean existsByRoomNumberAndProperty_Id(String roomNumber, Long propertyId);
 
     @Query("""
         SELECT r

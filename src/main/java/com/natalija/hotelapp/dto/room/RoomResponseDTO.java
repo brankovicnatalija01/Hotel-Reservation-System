@@ -1,5 +1,6 @@
 package com.natalija.hotelapp.dto.room;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.io.Serializable;
