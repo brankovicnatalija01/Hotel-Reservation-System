@@ -43,7 +43,7 @@ public class Room {
             joinColumns = @JoinColumn(name = "room_id"),
             inverseJoinColumns = @JoinColumn(name = "amenity_id")
     )
-    private Set<Amenity> amenities = new HashSet<>();;
+    private Set<Amenity> amenities = new HashSet<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Reservation> reservations;

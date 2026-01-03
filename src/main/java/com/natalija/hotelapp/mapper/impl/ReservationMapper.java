@@ -3,9 +3,6 @@ package com.natalija.hotelapp.mapper.impl;
 import com.natalija.hotelapp.dto.reservation.ReservationCreateRequestDTO;
 import com.natalija.hotelapp.dto.reservation.ReservationResponseDTO;
 import com.natalija.hotelapp.entity.Reservation;
-import com.natalija.hotelapp.entity.Room;
-import com.natalija.hotelapp.entity.User;
-import com.natalija.hotelapp.enums.ReservationStatus;
 import com.natalija.hotelapp.mapper.Mapper;
 import org.springframework.stereotype.Component;
 

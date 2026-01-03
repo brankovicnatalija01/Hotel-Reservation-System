@@ -5,14 +5,7 @@ import com.natalija.hotelapp.dto.room.RoomResponseDTO;
 import com.natalija.hotelapp.entity.Amenity;
 import com.natalija.hotelapp.entity.Room;
 import com.natalija.hotelapp.mapper.Mapper;
-import com.natalija.hotelapp.repository.AmenityRepository;
-import com.natalija.hotelapp.repository.PropertyRepository;
-import com.natalija.hotelapp.repository.RoomTypeRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.stream.Collectors;
 
 @Component
 public class RoomMapper implements Mapper<RoomRequestDTO, RoomResponseDTO, Room> {

@@ -8,6 +8,7 @@ import com.natalija.hotelapp.repository.AmenityRepository;
 import com.natalija.hotelapp.repository.PropertyRepository;
 import com.natalija.hotelapp.repository.RoomRepository;
 import com.natalija.hotelapp.repository.RoomTypeRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
 
@@ -30,12 +31,12 @@ public class RoomValidator implements Validator<RoomRequestDTO>{
     public void validate(RoomRequestDTO dto) throws ValidationException {
         if (dto.getPropertyId() != null &&
                 propertyRepository.findById(dto.getPropertyId()).isEmpty()) {
-            throw new ValidationException("Property not found with ID: " + dto.getPropertyId());
+            throw new EntityNotFoundException("Property not found with ID: " + dto.getPropertyId());
         }
 
         if (dto.getRoomTypeId() != null &&
                 roomTypeRepository.findById(dto.getRoomTypeId()).isEmpty()) {
-            throw new ValidationException("RoomType not found with ID: " + dto.getRoomTypeId());
+            throw new EntityNotFoundException("RoomType not found with ID: " + dto.getRoomTypeId());
         }
 
         if (dto.getAmenityIds() != null && !dto.getAmenityIds().isEmpty()) {
@@ -124,7 +125,7 @@ public class RoomValidator implements Validator<RoomRequestDTO>{
 
         for (Long id : amenityIds) {
             if (!existingAmenityIds.contains(id)) {
-                throw new ValidationException("Amenity not found with ID: " + id);
+                throw new EntityNotFoundException("Amenity not found with ID: " + id);
             }
         }
     }

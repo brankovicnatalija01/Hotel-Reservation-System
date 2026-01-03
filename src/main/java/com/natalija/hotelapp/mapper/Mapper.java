@@ -1,7 +1,8 @@
 package com.natalija.hotelapp.mapper;
 
 /**
- * @param <Dto>
+ * @param <ReqDTO>
+ * @param <ResDTO>
  * @param <Entity>
  */
 

@@ -88,11 +88,9 @@ public class RoomSpecification {
                 sub.select(res.get("room").get("id"))
                         .where(
                                 cb.and(
-                                        // overlap datuma
                                         cb.lessThan(res.get("checkInDate"), req.getCheckOut()),
                                         cb.greaterThan(res.get("checkOutDate"), req.getCheckIn()),
 
-                                        // samo blokirajući statusi
                                         res.get("status").in(
                                                 ReservationStatus.PENDING,
                                                 ReservationStatus.CONFIRMED

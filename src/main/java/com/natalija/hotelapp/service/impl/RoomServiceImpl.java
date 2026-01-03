@@ -3,10 +3,7 @@ package com.natalija.hotelapp.service.impl;
 import com.natalija.hotelapp.dto.room.RoomRequestDTO;
 import com.natalija.hotelapp.dto.room.RoomResponseDTO;
 import com.natalija.hotelapp.dto.room.RoomSearchRequestDTO;
-import com.natalija.hotelapp.entity.Amenity;
-import com.natalija.hotelapp.entity.Property;
 import com.natalija.hotelapp.entity.Room;
-import com.natalija.hotelapp.entity.RoomType;
 import com.natalija.hotelapp.enums.ValidationType;
 import com.natalija.hotelapp.mapper.impl.RoomMapper;
 import com.natalija.hotelapp.repository.*;
@@ -19,10 +16,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -77,7 +72,6 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<RoomResponseDTO> search(RoomSearchRequestDTO request) {
-
         Specification<Room> specification = RoomSpecification.filter(request);
 
         return roomRepository.findAll(specification)
@@ -115,18 +109,12 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> new EntityNotFoundException("Room not found with ID: " + roomId));
 
         // Set fields if present
-        if (dto.getPropertyId() != null) {
-            existingRoom.setProperty(propertyRepository.findById(dto.getPropertyId()).get());
-        }
-        if (dto.getRoomTypeId() != null) {
-            existingRoom.setRoomType(roomTypeRepository.findById(dto.getRoomTypeId()).get());
-        }
+        if (dto.getPropertyId() != null) existingRoom.setProperty(propertyRepository.findById(dto.getPropertyId()).get());
+        if (dto.getRoomTypeId() != null) existingRoom.setRoomType(roomTypeRepository.findById(dto.getRoomTypeId()).get());
         if (dto.getRoomNumber() != null) existingRoom.setRoomNumber(dto.getRoomNumber());
         if (dto.getPricePerNight() != null) existingRoom.setPricePerNight(dto.getPricePerNight());
         if (dto.getDescription() != null) existingRoom.setDescription(dto.getDescription());
-        if (dto.getAmenityIds() != null) {
-            existingRoom.setAmenities(new HashSet<>(amenityRepository.findAllById(dto.getAmenityIds())));
-        }
+        if (dto.getAmenityIds() != null) existingRoom.setAmenities(new HashSet<>(amenityRepository.findAllById(dto.getAmenityIds())));
 
         Room updatedRoom = roomRepository.save(existingRoom);
         return roomMapper.toDto(updatedRoom);
