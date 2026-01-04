@@ -2,6 +2,7 @@ package com.natalija.hotelapp.dto.room;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class RoomRequestDTO {
+public class RoomRequestDTO implements Serializable {
     private String roomNumber;
     private BigDecimal pricePerNight;
     private String description;
