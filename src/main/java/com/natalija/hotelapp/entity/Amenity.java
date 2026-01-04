@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString(exclude = "rooms")
+@ToString
 public class Amenity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
