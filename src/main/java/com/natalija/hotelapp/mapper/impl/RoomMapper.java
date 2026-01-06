@@ -4,6 +4,7 @@ import com.natalija.hotelapp.dto.room.RoomRequestDTO;
 import com.natalija.hotelapp.dto.room.RoomResponseDTO;
 import com.natalija.hotelapp.entity.Amenity;
 import com.natalija.hotelapp.entity.Room;
+import com.natalija.hotelapp.entity.RoomImage;
 import com.natalija.hotelapp.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,14 @@ public class RoomMapper implements Mapper<RoomRequestDTO, RoomResponseDTO, Room>
         dto.setAmenities(
                 room.getAmenities().stream().map(Amenity::getName).toList()
         );
+
+        if (room.getImages() != null) {
+            dto.setImageUrls(
+                    room.getImages().stream()
+                            .map(RoomImage::getUrl)
+                            .toList()
+            );
+        }
 
         return dto;
         }

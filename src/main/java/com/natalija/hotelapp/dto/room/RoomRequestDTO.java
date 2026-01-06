@@ -19,4 +19,5 @@ public class RoomRequestDTO implements Serializable {
     private Long propertyId;
     private Long roomTypeId;
     private List<Long> amenityIds;
+    private List<String> imageUrls;
 }

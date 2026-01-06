@@ -4,6 +4,7 @@ import com.natalija.hotelapp.dto.room.RoomRequestDTO;
 import com.natalija.hotelapp.dto.room.RoomResponseDTO;
 import com.natalija.hotelapp.dto.room.RoomSearchRequestDTO;
 import com.natalija.hotelapp.entity.Room;
+import com.natalija.hotelapp.entity.RoomImage;
 import com.natalija.hotelapp.enums.ValidationType;
 import com.natalija.hotelapp.mapper.impl.RoomMapper;
 import com.natalija.hotelapp.repository.*;
@@ -94,6 +95,17 @@ public class RoomServiceImpl implements RoomService {
             room.setAmenities(new HashSet<>(amenityRepository.findAllById(dto.getAmenityIds())));
         }
 
+        if (dto.getImageUrls() != null && !dto.getImageUrls().isEmpty()) {
+            List<RoomImage> images = dto.getImageUrls().stream()
+                    .map(url -> {
+                        RoomImage img = new RoomImage();
+                        img.setUrl(url);
+                        img.setRoom(room);
+                        return img;
+                    }).toList();
+            room.setImages(images);
+        }
+
         Room saved = roomRepository.save(room);
 
         return roomMapper.toDto(saved);
@@ -115,6 +127,17 @@ public class RoomServiceImpl implements RoomService {
         if (dto.getPricePerNight() != null) existingRoom.setPricePerNight(dto.getPricePerNight());
         if (dto.getDescription() != null) existingRoom.setDescription(dto.getDescription());
         if (dto.getAmenityIds() != null) existingRoom.setAmenities(new HashSet<>(amenityRepository.findAllById(dto.getAmenityIds())));
+        if (dto.getImageUrls() != null) {
+            existingRoom.getImages().clear(); // Remove old images
+            List<RoomImage> newImages = dto.getImageUrls().stream()
+                    .map(url -> {
+                        RoomImage img = new RoomImage();
+                        img.setUrl(url);
+                        img.setRoom(existingRoom);
+                        return img;
+                    }).toList();
+            existingRoom.getImages().addAll(newImages);
+        }
 
         Room updatedRoom = roomRepository.save(existingRoom);
         return roomMapper.toDto(updatedRoom);

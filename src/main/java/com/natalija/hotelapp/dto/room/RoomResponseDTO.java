@@ -27,5 +27,6 @@ public class RoomResponseDTO implements Serializable {
 
     // Amenities
     private List<String> amenities;
+    private List<String> imageUrls;
 
 }

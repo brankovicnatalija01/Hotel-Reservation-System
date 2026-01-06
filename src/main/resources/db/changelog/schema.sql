@@ -66,3 +66,11 @@ CREATE TABLE IF NOT EXISTS reservations (
     user_id INTEGER REFERENCES users(id),
     room_id INTEGER REFERENCES rooms(id)
 );
+
+-- 9. Room images
+ CREATE TABLE room_images (
+                              id BIGSERIAL PRIMARY KEY,
+                              url VARCHAR(500) NOT NULL,
+                              room_id BIGINT NOT NULL,
+                              CONSTRAINT fk_room_image FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
+ );
