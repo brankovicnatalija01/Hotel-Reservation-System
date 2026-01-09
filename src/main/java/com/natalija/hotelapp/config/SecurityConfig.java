@@ -82,11 +82,11 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/api/reservations/**", "/api/rooms/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/reservations/**", "/api/rooms/{id}").hasRole("ADMIN")
 
-                                // --- USER ONLY ---
-                                .requestMatchers(HttpMethod.POST, "/api/reservations", "/api/review").hasRole("USER")
-                                .requestMatchers(HttpMethod.PUT, "/api/review/**").hasRole("USER")
-                                .requestMatchers(HttpMethod.DELETE, "/api/review/**").hasRole("USER")
-                                .requestMatchers(HttpMethod.GET, "/api/review/user/**").hasRole("USER")
+                                // --- USER and ADMIN  ---
+                                .requestMatchers(HttpMethod.POST, "/api/reservations", "/api/review", "/cd Dapi/reservations/user/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/review/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/review/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/review/user/**").hasAnyRole("USER", "ADMIN")
 
                                 .anyRequest().authenticated()
                 );

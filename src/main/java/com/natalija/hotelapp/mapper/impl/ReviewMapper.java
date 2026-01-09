@@ -19,10 +19,10 @@ public class ReviewMapper implements Mapper<ReviewRequestDTO, ReviewResponseDTO,
     @Override
     public ReviewResponseDTO toDto(Review review) {
         ReviewResponseDTO dto = new ReviewResponseDTO();
-        dto.setReviewId(review.getReviewId());
+        dto.setReviewId(review.getId());
         dto.setRating(review.getRating());
         dto.setComment(review.getComment());
-        dto.setReservationId(review.getReservation().getReservationId());
+        dto.setReservationId(review.getReservation().getId());
         dto.setUserId(review.getReservation().getUser().getId());
         dto.setUserFirstName(review.getReservation().getUser().getFirstName());
         dto.setUserLastName(review.getReservation().getUser().getLastName());

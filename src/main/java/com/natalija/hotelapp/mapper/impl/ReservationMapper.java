@@ -29,7 +29,7 @@ public class ReservationMapper implements Mapper<ReservationRequestDTO, Reservat
         }
 
         ReservationResponseDTO dto = new ReservationResponseDTO();
-        dto.setReservationId(reservation.getReservationId());
+        dto.setReservationId(reservation.getId());
         dto.setCheckInDate(reservation.getCheckInDate());
         dto.setCheckOutDate(reservation.getCheckOutDate());
         dto.setStatus(reservation.getStatus().name());

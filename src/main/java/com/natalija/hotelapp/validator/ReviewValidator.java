@@ -77,7 +77,7 @@ public class ReviewValidator implements Validator<ReviewRequestDTO>{
         }
 
         // Check if user already added a review for this reservation
-        boolean alreadyReviewed = reviewRepository.existsByReservation_ReservationId(dto.getReservationId());
+        boolean alreadyReviewed = reviewRepository.existsByReservation_Id(dto.getReservationId());
         if (alreadyReviewed) {
             throw new ValidationException("You have already submitted a review for this reservation");
         }

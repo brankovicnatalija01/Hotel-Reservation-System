@@ -67,7 +67,15 @@ CREATE TABLE IF NOT EXISTS reservations (
     room_id INTEGER REFERENCES rooms(id)
 );
 
--- 9. Room images
+-- 9. Reviews
+ CREATE TABLE IF NOT EXISTS reviews (
+                                        id SERIAL PRIMARY KEY,
+                                        rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+                                        comment TEXT,
+                                        reservation_id INTEGER UNIQUE REFERENCES reservations(id) ON DELETE CASCADE
+ );
+
+-- 10. Room images
  CREATE TABLE room_images (
                               id BIGSERIAL PRIMARY KEY,
                               url VARCHAR(500) NOT NULL,

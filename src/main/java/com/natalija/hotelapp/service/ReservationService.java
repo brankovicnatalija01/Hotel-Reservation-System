@@ -9,6 +9,7 @@ public interface ReservationService {
 
     ReservationResponseDTO createReservation(ReservationRequestDTO dto);
     ReservationResponseDTO getReservationById(Long id);
+    List<ReservationResponseDTO> getReservationsByUserId(Long userId);
     List<ReservationResponseDTO> getAllReservations();
     void deleteReservation(Long reservationId);
 

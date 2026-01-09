@@ -33,6 +33,12 @@ public class ReservationController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/user/{userId}") // GET reservations by userId
+    public ResponseEntity<List<ReservationResponseDTO>> getReservationsByUserId(@PathVariable Long userId) {
+        List<ReservationResponseDTO> reservations = reservationService.getReservationsByUserId(userId);
+        return ResponseEntity.ok(reservations);
+    }
+
     @GetMapping // GET all reservations
     public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
 

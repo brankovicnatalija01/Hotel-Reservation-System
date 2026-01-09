@@ -8,12 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long>, JpaSpecificationExecutor<Reservation> {
 
     @Query("""
-        SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END
+        SELECT CASE WHEN COUNT(r.id) > 0 THEN true ELSE false END
         FROM Reservation r
         WHERE r.room.id = :roomId
           AND r.status IN ('PENDING', 'CONFIRMED')
@@ -25,4 +26,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
             @Param("checkInDate") LocalDate checkInDate,
             @Param("checkOutDate") LocalDate checkOutDate
     );
+
+    List<Reservation> findByUserId(Long userId);
 }

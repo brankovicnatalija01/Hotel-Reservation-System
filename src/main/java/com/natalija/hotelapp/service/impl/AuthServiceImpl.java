@@ -66,13 +66,13 @@ public class AuthServiceImpl implements AuthService {
                 .orElse("ROLE_USER");
 
         // 5. Build and return the response DTO
-        return new LoginResponse(jwt, userDetails.getUsername(), role);
+        return new LoginResponse(jwt, userDetails.getUsername(), role, userDetails.getId());
     }
 
     @Override
     public void register(RegisterRequestDTO dto) {
         registerValidator.validate(dto);
-        Role userRole = roleRepository.findByName("USER").orElseThrow(() -> new IllegalStateException("USER role not found"));
+        Role userRole = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new IllegalStateException("ROLE_USER not found"));
 
         User user = new User();
         user.setFirstName(dto.getFirstName().trim());

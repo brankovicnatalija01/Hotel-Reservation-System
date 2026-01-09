@@ -62,6 +62,17 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public List<ReservationResponseDTO> getReservationsByUserId(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new EntityNotFoundException("User not found with ID: " + userId);
+        }
+        List<Reservation> reservations = reservationRepository.findByUserId(userId);
+        return reservations.stream()
+                .map(reservationMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<ReservationResponseDTO> getAllReservations() {
         return reservationRepository.findAll().stream()
                 .map(reservationMapper::toDto)

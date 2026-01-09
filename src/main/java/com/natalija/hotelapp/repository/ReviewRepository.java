@@ -11,11 +11,11 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    boolean existsByReservation_ReservationId(Long reservationId);
+    boolean existsByReservation_Id(Long id);
     List<Review> findAllByReservation_Room_Id(Long roomId);
     List<Review> findAllByReservation_User_Id(Long userId);
 
     @Modifying
-    @Query("DELETE FROM Review r WHERE r.reviewId = :id")
+    @Query("DELETE FROM Review r WHERE r.id = :id")
     void deleteByIdCustom(@Param("id") Long id);
 }
