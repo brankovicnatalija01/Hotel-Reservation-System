@@ -7,7 +7,6 @@ import com.natalija.hotelapp.dto.room.RoomSearchRequestDTO;
 import java.util.List;
 
 public interface RoomService {
-
     List<RoomResponseDTO> getAllRooms();
     RoomResponseDTO getRoomById(Long id);
     List<RoomResponseDTO> getRoomsByRoomType(String roomTypeName);
